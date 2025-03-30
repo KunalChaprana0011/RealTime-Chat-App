@@ -29,10 +29,23 @@ export const useAuthStore = create((set) => ({
       set({ authUser: res.data });
       toast.success("Account Created Successfully!!");
     } catch (error) {
-      toast.error("Something went Wrong : ", error.response.data.message);
+      toast.error(error.response.data.message);
     }
     finally{
       set({isSigningUp : false})
+    }
+  },
+
+  signin : async (data) => {
+    set({ isSignningIn: true });
+    try {
+      const res = await axiosInstance.post("/auth/signin", data);
+      set({ authUser: res.data });
+      toast.success("Signed in successfully!!");
+    } catch (error) {
+      toast.error(error.response.data.message);
+    } finally {
+      set({ isSignningIn: false });
     }
   },
 
@@ -43,7 +56,7 @@ export const useAuthStore = create((set) => ({
       toast.success("Signed out Successfully!!");
       
     } catch (error) {
-      toast.error("Something went Wrong : ", error.response.data.message);
+      toast.error(error.response.data.message);
     }
   }
 }));
