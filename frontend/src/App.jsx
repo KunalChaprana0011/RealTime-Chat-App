@@ -9,10 +9,12 @@ import { useAuthStore } from "./zustand/useAuthStore.js";
 import { useEffect } from "react";
 import {Loader} from "lucide-react"
 import {Toaster} from "react-hot-toast"
+import { useThemeStore } from "./zustand/useThemeStore.js";
 
 
 const App = () => {
   const { authUser, checkingAuthentication ,isCheckingAuthentication } = useAuthStore();
+  const { theme } = useThemeStore();
   useEffect(() => {
     checkingAuthentication();
   }, [checkingAuthentication]);
@@ -30,7 +32,7 @@ const App = () => {
 
 
   return (
-    <div>
+    <div data-theme = {theme}>
       <Navbar />
       <Routes>
         <Route path="/" element={authUser ? <Home /> : <Navigate to = "/signin" />} />
