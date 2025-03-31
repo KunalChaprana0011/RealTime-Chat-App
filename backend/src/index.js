@@ -21,7 +21,7 @@ app.use(
 const PORT = process.env.PORT;
 
 app.use("/api/auth", authRoutes);
-app.use("/api/message", messageRoutes);
+app.use("/api/messages", messageRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
